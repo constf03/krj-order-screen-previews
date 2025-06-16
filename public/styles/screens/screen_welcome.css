@@ -1,4 +1,4 @@
-#screen-welcome {
+.screen-welcome {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -18,7 +18,7 @@
   outline: 3px solid var(--krj-red-primary);
 }
 
-#section-languages {
+.container-languages {
   height: 80px;
 }
 
@@ -27,7 +27,7 @@
   height: 46px;
   border-radius: 100px;
   border: 2px solid black;
-  outline: 4px solid gray;
+  outline: 2px solid gray;
   cursor: pointer;
 }
 
@@ -35,6 +35,6 @@
   width: 54px;
   height: 54px;
   outline: 4px solid var(--krj-green-primary);
-  transition: 200ms;
+  transition: 100ms;
   margin: 0px 10px;
 }
