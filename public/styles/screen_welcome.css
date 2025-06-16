@@ -1,0 +1,40 @@
+#screen-welcome {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0px;
+}
+
+#logo {
+  width: 128px;
+}
+
+#btn-start {
+  border: 3px solid var(--krj-yellow-primary);
+  font-weight: 700;
+  padding: 10px 30px;
+  outline: 3px solid var(--krj-red-primary);
+}
+
+#section-languages {
+  height: 80px;
+}
+
+.btn-language {
+  width: 46px;
+  height: 46px;
+  border-radius: 100px;
+  border: 2px solid black;
+  outline: 4px solid gray;
+  cursor: pointer;
+}
+
+.language-active {
+  width: 54px;
+  height: 54px;
+  outline: 4px solid var(--krj-green-primary);
+  transition: 200ms;
+  margin: 0px 10px;
+}

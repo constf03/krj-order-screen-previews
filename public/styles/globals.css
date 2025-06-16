@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-family: var(--Roboto);
+}
+
+h1 {
+  color: var(--krj-red-primary);
+  font-family: var(--Montserrat);
+}
+
+.btn-primary {
+  border: none;
+  background: var(--dual-krj-red);
+  font-family: var(--Montserrat);
+}
+
+.btn-primary:hover {
+  background: var(--dual-krj-red-hover);
+}
+
+.btn-primary:active {
+  background: var(--dual-krj-red-press);
+}

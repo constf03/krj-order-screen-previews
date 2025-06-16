@@ -1,0 +1,30 @@
+:root {
+  --krj-beige-primary: hsl(46, 100%, 74%);
+  --krj-beige-secondary: hsl(46, 97%, 69%);
+  --krj-yellow-primary: hsl(46, 100%, 49%);
+  --krj-yellow-secondary: hsl(46, 100%, 44%);
+  --krj-green-primary: hsl(101, 100%, 35%);
+  --krj-green-secondary: hsl(101, 100%, 30%);
+  --krj-red-primary: hsl(0, 100%, 26%);
+  --krj-red-primary-hover: hsl(0, 100%, 36%);
+  --krj-red-primary-press: hsl(0, 100%, 16%);
+  --krj-red-primary-transparent: hsl(0, 100%, 26%, 50%);
+  --krj-red-secondary: hsl(0, 100%, 22%);
+  --krj-red-secondary-hover: hsl(0, 100%, 32%);
+  --krj-red-secondary-press: hsl(0, 100%, 12%);
+  --dual-krj-red: linear-gradient(
+    to bottom,
+    var(--krj-red-primary) 50%,
+    var(--krj-red-secondary) 50%
+  );
+  --dual-krj-red-hover: linear-gradient(
+    to bottom,
+    var(--krj-red-primary-hover) 50%,
+    var(--krj-red-secondary-hover) 50%
+  );
+  --dual-krj-red-press: linear-gradient(
+    to bottom,
+    var(--krj-red-primary-press) 50%,
+    var(--krj-red-secondary-press) 50%
+  );
+}
