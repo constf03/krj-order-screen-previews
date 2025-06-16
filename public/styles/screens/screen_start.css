@@ -1,0 +1,32 @@
+.screen-start {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.container-selection {
+  display: flex;
+  flex-direction: row;
+  max-width: 400px;
+  gap: 10px;
+}
+
+.card {
+  align-items: center;
+}
+
+.card img {
+  width: 50%;
+}
+
+.card:active {
+  transition: 100ms;
+  background: rgba(0, 0, 0, 40%);
+}
+
+.selection-active {
+  transition: 100ms;
+  outline: 4px solid var(--krj-green-primary);
+}

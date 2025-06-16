@@ -19,6 +19,8 @@ h1 {
 
 .btn-primary {
   border: none;
+  color: white;
+  padding: 5px 10px 5px 10px;
   background: var(--dual-krj-red);
   font-family: var(--Montserrat);
 }
@@ -29,4 +31,25 @@ h1 {
 
 .btn-primary:active {
   background: var(--dual-krj-red-press);
+}
+
+.btn-nav-next {
+  border: 3px solid var(--krj-yellow-primary);
+  font-weight: 700;
+  outline: 3px solid var(--krj-red-primary);
+}
+
+.btn-nav-back {
+  background: var(--dual-krj-yellow);
+  color: var(--krj-red-primary);
+  border: 3px solid var(--krj-red-primary);
+  font-weight: 700;
+  outline: 3px solid var(--krj-yellow-primary);
+}
+
+.container-nav-buttons {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
 }
