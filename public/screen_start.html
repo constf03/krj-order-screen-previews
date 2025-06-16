@@ -56,6 +56,8 @@
         </div>
       </div>
 
+      <p id="infoText"></p>
+
       <div class="container-nav-buttons">
         <button class="btn btn-primary btn-nav-back" id="btn-nav-back">
           Takaisin
@@ -77,12 +79,15 @@
       const restaurantOption = document.getElementById("selection_restaurant");
       const awayOption = document.getElementById("selection_away");
 
+      let infoText = document.getElementById("infoText");
+
       restaurantOption.addEventListener("click", () => {
         if (awayOption.classList.contains("selection-active")) {
           awayOption.classList.remove("selection-active");
         }
         if (!restaurantOption.classList.contains("selection-active")) {
           restaurantOption.classList.add("selection-active");
+          infoText.innerHTML = "Valinta: <b>Syön paikan päällä</b>";
         }
       });
 
@@ -92,6 +97,7 @@
         }
         if (!awayOption.classList.contains("selection-active")) {
           awayOption.classList.add("selection-active");
+          infoText.innerHTML = "Valinta: <b>Otan mukaan</b>";
         }
       });
     </script>
