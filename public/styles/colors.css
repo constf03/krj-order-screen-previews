@@ -27,4 +27,9 @@
     var(--krj-red-primary-press) 50%,
     var(--krj-red-secondary-press) 50%
   );
+  --dual-krj-yellow: linear-gradient(
+    to bottom,
+    var(--krj-yellow-primary) 50%,
+    var(--krj-yellow-secondary) 50%
+  );
 }
