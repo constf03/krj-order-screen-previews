@@ -33,20 +33,6 @@ h1 {
   background: var(--dual-krj-red-press);
 }
 
-.btn-nav-next {
-  border: 3px solid var(--krj-yellow-primary);
-  font-weight: 700;
-  outline: 3px solid var(--krj-red-primary);
-}
-
-.btn-nav-back {
-  background: var(--dual-krj-yellow);
-  color: var(--krj-red-primary);
-  border: 3px solid var(--krj-red-primary);
-  font-weight: 700;
-  outline: 3px solid var(--krj-yellow-primary);
-}
-
 .container-nav-buttons {
   display: flex;
   width: 100%;

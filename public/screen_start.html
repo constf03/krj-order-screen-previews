@@ -59,10 +59,10 @@
       <p id="infoText"></p>
 
       <div class="container-nav-buttons">
-        <button class="btn btn-primary btn-nav-back" id="btn-nav-back">
+        <button class="btn btn-outline-secondary" id="btn-nav-back">
           Takaisin
         </button>
-        <button class="btn btn-primary btn-nav-next" id="btn-nav-next">
+        <button class="btn btn-outline-secondary" id="btn-nav-next">
           Seuraava
         </button>
       </div>
@@ -88,6 +88,8 @@
         if (!restaurantOption.classList.contains("selection-active")) {
           restaurantOption.classList.add("selection-active");
           infoText.innerHTML = "Valinta: <b>Syön paikan päällä</b>";
+          localStorage.setItem("whereToEatOption", "restaurant");
+          console.log(localStorage.getItem("whereToEatOption"));
         }
       });
 
@@ -98,6 +100,8 @@
         if (!awayOption.classList.contains("selection-active")) {
           awayOption.classList.add("selection-active");
           infoText.innerHTML = "Valinta: <b>Otan mukaan</b>";
+          localStorage.setItem("whereToEatOption", "away");
+          console.log(localStorage.getItem("whereToEatOption"));
         }
       });
     </script>
