@@ -1,0 +1,52 @@
+.screen-order-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 12px;
+  background-color: gray;
+}
+
+.container-order-screen {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.container-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  background-color: blue;
+  height: 500px;
+}
+
+.menu-logo {
+  width: 128px;
+  height: 128px;
+}
+
+.btn-menu {
+  font-weight: bold;
+  width: 100%;
+  font-family: var(--Montserrat);
+}
+
+.container-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 6px;
+  width: 100%;
+}
+
+.card-body {
+  background: var(--dual-krj-yellow);
+}
+
+.collapsible-item {
+  font-family: var(--Roboto);
+  font-size: 12px;
+}
