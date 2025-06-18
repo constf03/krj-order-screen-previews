@@ -70,7 +70,8 @@
         </div>
         <div class="container-right">
           <div>
-            <h1><b>Suosituimmat</b></h1>
+            <h2 class="h2"><b>Kokin valinnat</b></h2>
+            <div class="container-menu-items" id="chef-selection"></div>
           </div>
         </div>
       </div>
@@ -103,6 +104,38 @@
     ></script>
 
     <!--Embedded JS Code-->
-    <script></script>
+    <script>
+      const chefSelection = document.getElementById("chef-selection");
+
+      const fetchData = async () => {
+        const response = await fetch(
+          "https://api.ravintolajohnny.fi/api/menu/kokinvalinnat"
+        );
+        const data = await response.json();
+        return data;
+      };
+
+      const displayData = async () => {
+        const payload = await fetchData();
+
+        let dataDisplay = payload
+          .map((object) => {
+            const { itemName, itemDescription } = object;
+
+            return `
+            <div class="menu-item">
+              <img src="./images/krj_logo_default.png" style="width: 64px;" alt="..."/>
+              <p>${itemName}</p>
+              <p>${itemDescription ? itemDescription : ""}</p>
+            </div>
+          `;
+          })
+          .join("");
+
+        chefSelection.innerHTML = dataDisplay;
+      };
+
+      displayData();
+    </script>
   </body>
 </html>

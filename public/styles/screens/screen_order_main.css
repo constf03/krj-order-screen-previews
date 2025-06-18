@@ -50,3 +50,30 @@
   font-family: var(--Roboto);
   font-size: 12px;
 }
+
+.container-right {
+  padding: 10px;
+}
+
+.container-menu-items {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+@media only screen and (min-width: 600px) {
+  .container-menu-items {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 120px;
+  padding: 6px;
+  border: 1px solid black;
+}
