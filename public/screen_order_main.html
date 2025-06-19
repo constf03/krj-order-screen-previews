@@ -30,14 +30,12 @@
     <script type="module" src="./scripts/navigation.js"></script>
   </head>
   <body>
-    <div class="screen-order-main">
+    <div class="page">
+      <div class="banner">
+        <img src="images/krj_banner.png" alt="..." />
+      </div>
       <div class="container-order-screen">
         <div class="container-left">
-          <img
-            src="./images/krj_logo_default.png"
-            class="menu-logo"
-            alt="..."
-          />
           <div class="container-menu">
             <button
               class="btn btn-primary btn-menu m-1"
@@ -70,7 +68,7 @@
         </div>
         <div class="container-right">
           <div>
-            <h2 class="h2"><b>Kokin valinnat</b></h2>
+            <h3 class="h3"><b>Kokin valinnat</b></h3>
             <div class="container-menu-items" id="chef-selection"></div>
           </div>
         </div>
@@ -120,15 +118,28 @@
 
         let dataDisplay = payload
           .map((object) => {
-            const { itemName, itemDescription } = object;
+            const { id, itemName, itemDescription } = object;
 
-            return `
+            const menuItem = `
             <div class="menu-item">
               <img src="./images/krj_logo_default.png" style="width: 64px;" alt="..."/>
               <p>${itemName}</p>
               <p>${itemDescription ? itemDescription : ""}</p>
             </div>
           `;
+
+            switch (itemName) {
+              case "Tulivuori Kana":
+              case "Paistettua Kiinalaista Nuudelia (Nauta)":
+              case "Japanilaiset Nuudelit (Kana)":
+              case "Kung Po Ankka":
+              case "Satay Jättirapu":
+              case "Kevätrullat (10 kpl)":
+                return menuItem;
+                break;
+              default:
+                break;
+            }
           })
           .join("");
 
