@@ -71,6 +71,10 @@
             <h3 class="h3"><b>Kokin valinnat</b></h3>
             <div class="container-menu-items" id="chef-selection"></div>
           </div>
+          <div class="mt-4">
+            <h3 class="h3"><b>Ota itsellesi juoma</b></h3>
+            <div class="container-menu-items" id="drinks"></div>
+          </div>
         </div>
       </div>
       <div class="container-bottom-menu"></div>
@@ -104,21 +108,22 @@
     <!--Embedded JS Code-->
     <script>
       const chefSelection = document.getElementById("chef-selection");
+      const drinkSelection = document.getElementById("drinks");
 
-      const fetchData = async () => {
+      const fetchData = async (endpoint) => {
         const response = await fetch(
-          "https://api.ravintolajohnny.fi/api/menu/kokinvalinnat"
+          `https://api.ravintolajohnny.fi/api/menu/${endpoint}`
         );
         const data = await response.json();
         return data;
       };
 
-      const displayData = async () => {
-        const payload = await fetchData();
+      const displayChefSelection = async () => {
+        const payload = await fetchData("kokinvalinnat");
 
         let dataDisplay = payload
           .map((object) => {
-            const { id, itemName, itemDescription } = object;
+            const { itemName, itemDescription } = object;
 
             const menuItem = `
             <div class="menu-item">
@@ -146,7 +151,42 @@
         chefSelection.innerHTML = dataDisplay;
       };
 
-      displayData();
+      displayChefSelection();
+
+      const displayDrinks = async () => {
+        const payload = await fetchData("juomat");
+        console.log("drinks", payload);
+
+        let dataDisplay = payload
+          .map((object) => {
+            const { itemName, itemPrice } = object;
+
+            const createDrink = (imgSrc) => {
+              return `
+            <div class="menu-item">
+              <img src=${imgSrc} style="width: 40px" alt="..."/>
+              <p>${itemName}</p>
+            </div>
+          `;
+            };
+
+            switch (itemName) {
+              case "Coca Cola (0,33 l)":
+                return createDrink("./images/coke_033l.png");
+                break;
+              case "Coca Cola (1,5 l)":
+                return createDrink("./images/coke_15l.png");
+                break;
+              default:
+                break;
+            }
+          })
+          .join("");
+
+        drinkSelection.innerHTML = dataDisplay;
+      };
+
+      displayDrinks();
     </script>
   </body>
 </html>
