@@ -12,9 +12,17 @@ body {
   font-family: var(--Roboto);
 }
 
-h1 {
+.h1,
+.h2,
+.h3 {
   color: var(--krj-red-primary);
   font-family: var(--Montserrat);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .btn-primary {
@@ -38,4 +46,10 @@ h1 {
   width: 100%;
   flex-direction: row;
   justify-content: space-around;
+}
+
+@media only screen and (min-width: 961px) {
+  .page {
+    width: 960px;
+  }
 }

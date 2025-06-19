@@ -2,7 +2,9 @@
   --krj-beige-primary: hsl(46, 100%, 74%);
   --krj-beige-secondary: hsl(46, 97%, 69%);
   --krj-yellow-primary: hsl(46, 100%, 49%);
+  --krj-yellow-primary-press: hsl(46, 100%, 29%);
   --krj-yellow-secondary: hsl(46, 100%, 44%);
+  --krj-yellow-secondary-press: hsl(46, 100%, 24%);
   --krj-green-primary: hsl(101, 100%, 35%);
   --krj-green-secondary: hsl(101, 100%, 30%);
   --krj-red-primary: hsl(0, 100%, 26%);
@@ -31,5 +33,10 @@
     to bottom,
     var(--krj-yellow-primary) 50%,
     var(--krj-yellow-secondary) 50%
+  );
+  --dual-krj-yellow-press: linear-gradient(
+    to bottom,
+    var(--krj-yellow-primary-press) 50%,
+    var(--krj-yellow-secondary-press) 50%
   );
 }
