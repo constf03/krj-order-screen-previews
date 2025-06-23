@@ -31,7 +31,7 @@
   </head>
   <body>
     <div class="page">
-      <div class="banner">
+      <div class="banner mb-4">
         <img src="images/krj_banner.png" alt="..." />
       </div>
       <div class="container-order-screen">
@@ -123,13 +123,20 @@
 
         let dataDisplay = payload
           .map((object) => {
-            const { itemName, itemDescription } = object;
+            const { itemName, itemDescription, itemPrice } = object;
 
             const menuItem = `
             <div class="menu-item">
-              <img src="./images/krj_logo_default.png" style="width: 64px;" alt="..."/>
-              <p>${itemName}</p>
-              <p>${itemDescription ? itemDescription : ""}</p>
+              <div class="menu-item-default-logo">
+                <img src="./images/krj_logo_default.png" style="width: 100%" alt="..."/>
+              </div>
+              <div class="menu-item-info">
+                <p>${itemName}</p>
+                <p>${itemDescription ? itemDescription : ""}</p>
+              </div>
+              <div class="menu-item-price-tag">
+                <span>${itemPrice} €</span>
+              </div>
             </div>
           `;
 
@@ -165,9 +172,14 @@
               return `
             <div class="menu-item">
               <div style="width: 40px">
-              <img src=${imgSrc} style="width: 100%" alt="..."/>
+                <img src=${imgSrc} style="width: 100%" alt="..."/>
               </div>
-              <p>${itemName}</p>
+              <div>
+                <p>${itemName}</p>
+              </div>
+              <div class="menu-item-price-tag">
+                ${itemPrice} €
+              </div>
             </div>
           `;
             };
