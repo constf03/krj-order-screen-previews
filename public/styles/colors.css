@@ -39,4 +39,9 @@
     var(--krj-yellow-primary-press) 50%,
     var(--krj-yellow-secondary-press) 50%
   );
+  --dual-krj-green: linear-gradient(
+    to bottom,
+    var(--krj-green-primary) 50%,
+    var(--krj-green-secondary) 50%
+  );
 }
