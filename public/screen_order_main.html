@@ -164,7 +164,9 @@
             const createDrink = (imgSrc) => {
               return `
             <div class="menu-item">
-              <img src=${imgSrc} style="width: 40px" alt="..."/>
+              <div style="width: 40px">
+              <img src=${imgSrc} style="width: 100%" alt="..."/>
+              </div>
               <p>${itemName}</p>
             </div>
           `;
