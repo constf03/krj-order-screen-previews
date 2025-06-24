@@ -86,22 +86,22 @@
               <button
                 class="btn btn-outline-secondary"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                data-bs-target="#cancelOrderModal"
               >
                 Peruuta tilaus
               </button>
-              <!-- Modal -->
+              <!-- Cancel Order Modal -->
               <div
                 class="modal fade"
-                id="exampleModal"
+                id="cancelOrderModal"
                 tabindex="-1"
-                aria-labelledby="exampleModalLabel"
+                aria-labelledby="cancelOrderModalLabel"
                 aria-hidden="true"
               >
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      <h1 class="modal-title fs-5" id="cancelOrderModalLabel">
                         Vahvistus
                       </h1>
                       <button
@@ -143,6 +143,86 @@
               Voit lisätä tuotteita tilaukseesi koskettamalla niitä.
             </p>
             <div class="container-menu-items" id="chef-selection"></div>
+            <!--Add To Cart Modal-->
+            <div
+              class="modal fade"
+              id="addToCartModal"
+              tabindex="-1"
+              aria-labelledby="addToCartModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addToCartModalLabel">
+                      Lisää tuote ostoskärryyn
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div>
+                      <div style="width: 64px">
+                        <img
+                          src="./images/krj_logo_default.png"
+                          style="width: 100%"
+                          alt="..."
+                        />
+                      </div>
+                      <div>
+                        <p id="modal-itemname"></p>
+                        <p id="modal-itemprice"></p>
+                      </div>
+                    </div>
+                    <div>
+                      <div>
+                        <button
+                          class="btn btn-outline-secondary"
+                          onclick="handleItemQuantityChange('-')"
+                        >
+                          -
+                        </button>
+                        <button
+                          class="btn btn-outline-secondary"
+                          onclick="handleItemQuantityChange('+')"
+                        >
+                          +
+                        </button>
+                        <div>
+                          <span id="modal-itemquantity"></span>
+                        </div>
+                      </div>
+                      <div>
+                        <span
+                          >Yhteensä: <span id="modal-itemtotal"></span
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Peruuta
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      data-bs-dismiss="modal"
+                      onclick="addToCart()"
+                    >
+                      Lisää
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="mt-4">
             <h3 class="h3"><b>Ota itsellesi juotavaa</b></h3>
@@ -173,6 +253,15 @@
     <script>
       const chefSelection = document.getElementById("chef-selection");
       const drinkSelection = document.getElementById("drinks");
+      const modalItemName = document.getElementById("modal-itemname");
+      const modalItemPrice = document.getElementById("modal-itemprice");
+      const modalItemQuantity = document.getElementById("modal-itemquantity");
+      const modalItemTotal = document.getElementById("modal-itemtotal");
+      const cartAmount = document.getElementById("amount");
+      const confirmCancelBtn = document.getElementById("btn-confirm-cancel");
+      let quantity = 1;
+      let cartItems = [];
+      let itemId;
 
       const fetchData = async (endpoint) => {
         const response = await fetch(
@@ -187,10 +276,15 @@
 
         let dataDisplay = payload
           .map((object) => {
-            const { itemName, itemDescription, itemPrice } = object;
+            const { id, itemName, itemDescription, itemPrice } = object;
 
             const menuItem = `
-            <div class="menu-item">
+            <div
+            class="menu-item"
+            data-bs-toggle="modal"
+            data-bs-target="#addToCartModal"
+            onclick="setAddToCartModalData(${id}, '${itemName}', ${itemPrice})"
+            >
               <div class="menu-item-default-logo">
                 <img src="./images/krj_logo_default.png" style="width: 100%" alt="..."/>
               </div>
@@ -266,10 +360,57 @@
 
       displayDrinks();
 
-      const confirmCancelBtn = document.getElementById("btn-confirm-cancel");
       confirmCancelBtn.addEventListener("click", () => {
         window.location.href = "/public/";
       });
+
+      const setAddToCartModalData = (id, name, price) => {
+        itemId = id;
+        modalItemName.innerHTML = name;
+        modalItemPrice.innerHTML = `${price} €`;
+        modalItemQuantity.innerHTML = quantity;
+        modalItemTotal.innerHTML = `${price * modalItemQuantity.innerHTML} €`;
+      };
+
+      const handleItemQuantityChange = (operation) => {
+        if (operation === "+") {
+          quantity++;
+          modalItemQuantity.innerHTML = quantity;
+          modalItemTotal.innerHTML = `${
+            parseInt(modalItemPrice.innerHTML) *
+            parseInt(modalItemQuantity.innerHTML)
+          } €`;
+        }
+
+        if (operation === "-") {
+          if (quantity === 1) return;
+          quantity--;
+          modalItemQuantity.innerHTML = quantity;
+          modalItemTotal.innerHTML = `${
+            parseInt(modalItemPrice.innerHTML) *
+            parseInt(modalItemQuantity.innerHTML)
+          } €`;
+        }
+      };
+
+      const addToCart = () => {
+        const newItem = {
+          id: itemId,
+          name: modalItemName.innerHTML,
+          price: parseInt(modalItemPrice.innerHTML),
+          quantity: parseInt(modalItemQuantity.innerHTML),
+          total: parseInt(modalItemTotal.innerHTML),
+        };
+        for (let i = 0; i < cartItems.length; i++) {
+          if (cartItems[i].id === newItem.id) {
+            console.log("Item already exists in cart");
+            return;
+          }
+        }
+        cartItems.push(newItem);
+        console.log(cartItems);
+        cartAmount.innerHTML = cartItems.length;
+      };
     </script>
   </body>
 </html>
