@@ -66,18 +66,33 @@
             </div>
           </div>
           <div class="container-counter">
-            <div style="width: 100%">
-              <img
-                src="images/shopping_cart.png"
-                style="width: 100%"
-                alt="..."
-              />
+            <div class="container-cart">
+              <p class="cart-header">Ostoskärry</p>
+              <div style="width: 100%">
+                <img
+                  src="images/shopping_cart.png"
+                  style="width: 100%"
+                  alt="..."
+                />
+              </div>
+              <div class="container-cart-amount">
+                <span id="amount">0</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <button class="btn btn-outline-secondary mb-2">
+                Siirry maksamaan
+              </button>
+              <button class="btn btn-outline-secondary">Peruuta tilaus</button>
             </div>
           </div>
         </div>
         <div class="container-right">
           <div>
             <h3 class="h3"><b>Kokin valinnat</b></h3>
+            <p class="mb-8">
+              Voit lisätä tuotteita tilaukseesi koskettamalla niitä.
+            </p>
             <div class="container-menu-items" id="chef-selection"></div>
           </div>
           <div class="mt-4">
@@ -85,15 +100,6 @@
             <div class="container-menu-items" id="drinks"></div>
           </div>
         </div>
-      </div>
-      <div class="container-bottom-menu"></div>
-      <div class="container-nav-buttons">
-        <button class="btn btn-outline-secondary" id="btn-nav-back">
-          Takaisin
-        </button>
-        <button class="btn btn-outline-secondary" id="btn-nav-next">
-          Seuraava
-        </button>
       </div>
     </div>
 
