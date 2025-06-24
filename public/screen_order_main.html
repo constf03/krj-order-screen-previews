@@ -83,7 +83,56 @@
               <button class="btn btn-outline-secondary mb-2">
                 Siirry maksamaan
               </button>
-              <button class="btn btn-outline-secondary">Peruuta tilaus</button>
+              <button
+                class="btn btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Peruuta tilaus
+              </button>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Vahvistus
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      Haluatko varmasti peruuttaa tilauksesi?
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Ei
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="btn-confirm-cancel"
+                      >
+                        Kyllä
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -216,6 +265,11 @@
       };
 
       displayDrinks();
+
+      const confirmCancelBtn = document.getElementById("btn-confirm-cancel");
+      confirmCancelBtn.addEventListener("click", () => {
+        window.location.href = "/public/";
+      });
     </script>
   </body>
 </html>
