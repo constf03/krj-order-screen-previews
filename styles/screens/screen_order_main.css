@@ -100,6 +100,37 @@
   width: 26px;
 }
 
+#list-shopping-cart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.container-cart-item {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.wrapper-cart-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 10px;
+}
+
+.item-content-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.pricetag-cart-item {
+  font-weight: 600;
+  font-size: 18px;
+}
+
 .container-right {
   padding: 10px;
 }

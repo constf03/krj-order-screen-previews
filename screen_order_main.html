@@ -104,7 +104,7 @@
                   </div>
                   <div class="modal-body">
                     <div id="list-shopping-cart"></div>
-                    <div><span id="cart-total"></span></div>
+                    <div class="mt-8"><span id="cart-total"></span></div>
                   </div>
                   <div class="modal-footer">
                     <button
@@ -488,9 +488,17 @@
 
             return `
             <div class="container-cart-item">
-              <div>
-                <span>${name} <span class="badge text-bg-secondary">${quantity}</span></span>
-                <span>${total} €</span>
+              <div class="wrapper-cart-item">
+                <div class="item-content-left">
+                  <span>${name}</span>
+                  <div>
+                    <span class="badge text-bg-secondary">${quantity}</span>
+                    <button class="btn btn-outline-primary">+</button>
+                    <button class="btn btn-outline-primary">-</button>
+                    <button class="btn btn-outline-danger">X</button>
+                  </div>
+                </div>
+                <span class="pricetag-cart-item">${total} €</span>
               </div>
             </div>
           `;
