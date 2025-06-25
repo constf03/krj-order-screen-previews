@@ -66,7 +66,11 @@
             </div>
           </div>
           <div class="container-counter">
-            <div class="container-cart">
+            <div
+              class="container-cart"
+              data-bs-toggle="modal"
+              data-bs-target="#cartModal"
+            >
               <p class="cart-header">Ostoskärry</p>
               <div style="width: 100%">
                 <img
@@ -77,6 +81,42 @@
               </div>
               <div class="container-cart-amount">
                 <span id="amount">0</span>
+              </div>
+            </div>
+            <!-- Cart Modal -->
+            <div
+              class="modal fade"
+              id="cartModal"
+              tabindex="-1"
+              aria-labelledby="cartModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="cartModalLabel">
+                      Ostoskärry
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="list-shopping-cart"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Sulje
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
             <div style="display: flex; flex-direction: column">
@@ -259,6 +299,7 @@
       const modalItemTotal = document.getElementById("modal-itemtotal");
       const cartAmount = document.getElementById("amount");
       const confirmCancelBtn = document.getElementById("btn-confirm-cancel");
+      const shoppingCart = document.getElementById("list-shopping-cart");
       let quantity = 1;
       let cartItems = [];
       let itemId;
@@ -410,6 +451,25 @@
         cartItems.push(newItem);
         console.log(cartItems);
         cartAmount.innerHTML = cartItems.length;
+        localStorage.setItem("CartItems", cartItems);
+        updateShoppingCartData();
+      };
+
+      const updateShoppingCartData = () => {
+        const items = cartItems
+          .map((object) => {
+            const { name, price, quantity } = object;
+
+            return `
+            <div class="container-cart-item">
+              <span>${name} (${quantity})</span>
+              <span>${price} €</span>
+            </div>
+          `;
+          })
+          .join("");
+
+        shoppingCart.innerHTML = items;
       };
     </script>
   </body>
