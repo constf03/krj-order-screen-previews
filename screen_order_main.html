@@ -104,6 +104,7 @@
                   </div>
                   <div class="modal-body">
                     <div id="list-shopping-cart"></div>
+                    <div><span id="cart-total"></span></div>
                   </div>
                   <div class="modal-footer">
                     <button
@@ -112,6 +113,13 @@
                       data-bs-dismiss="modal"
                     >
                       Sulje
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Siirry maksamaan
                     </button>
                   </div>
                 </div>
@@ -298,9 +306,13 @@
       const cartAmount = document.getElementById("amount");
       const confirmCancelBtn = document.getElementById("btn-confirm-cancel");
       const shoppingCart = document.getElementById("list-shopping-cart");
+      const cartTotal = document.getElementById("cart-total");
       let quantity = 1;
       let cartItems = [];
+      let total = 0;
       let itemId;
+
+      cartTotal.innerHTML = `Yhteensä: ${total} €`;
 
       const fetchData = async (endpoint) => {
         const response = await fetch(
@@ -359,7 +371,6 @@
 
       const displayDrinks = async () => {
         const payload = await fetchData("juomat");
-        console.log("drinks", payload);
 
         let dataDisplay = payload
           .map((object) => {
@@ -403,7 +414,7 @@
         cancelOrder();
       });
 
-      const setAddToCartModalData = (id, name, price) => {
+      const setAddToCartModalData = (id, name, price, imgSrc) => {
         itemId = id;
         modalItemName.innerHTML = name;
         modalItemPrice.innerHTML = `${price} €`;
@@ -413,6 +424,8 @@
 
       const handleItemQuantityChange = (operation) => {
         if (operation === "+") {
+          if (quantity > 9 || modalItemName.innerHTML.includes("Kevätrullat"))
+            return;
           quantity++;
           modalItemQuantity.innerHTML = quantity;
           modalItemTotal.innerHTML = `${
@@ -422,7 +435,8 @@
         }
 
         if (operation === "-") {
-          if (quantity === 1) return;
+          if (quantity <= 1 || modalItemName.innerHTML.includes("Kevätrullat"))
+            return;
           quantity--;
           modalItemQuantity.innerHTML = quantity;
           modalItemTotal.innerHTML = `${
@@ -440,38 +454,62 @@
           quantity: parseInt(modalItemQuantity.innerHTML),
           total: parseInt(modalItemTotal.innerHTML),
         };
+
         for (let i = 0; i < cartItems.length; i++) {
           if (cartItems[i].id === newItem.id) {
             console.log("Item already exists in cart");
             return;
           }
         }
+
         cartItems.push(newItem);
-        console.log(cartItems);
-        cartAmount.innerHTML = cartItems.length;
-        localStorage.setItem("CartItems", cartItems);
+        console.log("Shopping Cart", cartItems);
+        cartAmount.innerHTML = getCartAmount();
+        localStorage.setItem("CartItems", JSON.stringify(cartItems));
         updateShoppingCartData();
+        quantity = 1;
+        console.log(JSON.parse(localStorage.getItem("CartItems")));
+      };
+
+      const getCartAmount = () => {
+        let amount = 0;
+
+        cartItems.forEach((object) => {
+          amount += object.quantity;
+        });
+
+        return amount;
       };
 
       const updateShoppingCartData = () => {
         const items = cartItems
           .map((object) => {
-            const { name, price, quantity } = object;
+            const { name, price, quantity, total } = object;
 
             return `
             <div class="container-cart-item">
-              <span>${name} (${quantity})</span>
-              <span>${price} €</span>
+              <div>
+                <span>${name} <span class="badge text-bg-secondary">${quantity}</span></span>
+                <span>${total} €</span>
+              </div>
             </div>
           `;
           })
           .join("");
 
+        total = 0;
+        cartItems.forEach((object) => {
+          total += object.total;
+        });
+
         shoppingCart.innerHTML = items;
+        cartTotal.innerHTML = `Yhteensä: ${total} €`;
+        localStorage.setItem("CartTotal", total.toString());
       };
 
       const cancelOrder = () => {
-        localStorage.setItem("CartItems", []);
+        localStorage.setItem("CartItems", JSON.stringify([]));
+        console.log(JSON.parse(localStorage.getItem("CartItems")));
         window.location.href = "./index.html";
       };
     </script>
