@@ -26,8 +26,6 @@
     <link href="./styles/colors.css" rel="stylesheet" />
     <link href="./styles/fonts.css" rel="stylesheet" />
     <link href="./styles/screens/screen_welcome.css" rel="stylesheet" />
-    <!--Custom Script Modules-->
-    <script type="module" src="./scripts/navigation.js"></script>
   </head>
   <body>
     <div class="screen-welcome">
@@ -63,6 +61,11 @@
     <script>
       const button_fi = document.getElementById("finnish");
       const button_eng = document.getElementById("english");
+      const startBtn = document.getElementById("btn-start");
+
+      startBtn.addEventListener("click", () => {
+        window.location.href = "./screen_start.html";
+      });
 
       button_fi.addEventListener("click", () => {
         if (!button_fi.classList.contains("language-active")) {

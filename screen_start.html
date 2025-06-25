@@ -26,8 +26,6 @@
     <link href="./styles/colors.css" rel="stylesheet" />
     <link href="./styles/fonts.css" rel="stylesheet" />
     <link href="./styles/screens/screen_start.css" rel="stylesheet" />
-    <!--Custom Script Modules-->
-    <script type="module" src="./scripts/navigation.js"></script>
   </head>
   <body>
     <div class="screen-start">
@@ -78,8 +76,12 @@
     <script>
       const restaurantOption = document.getElementById("selection_restaurant");
       const awayOption = document.getElementById("selection_away");
-
+      const next = document.getElementById("btn-nav-next");
       let infoText = document.getElementById("infoText");
+
+      next.addEventListener("click", () => {
+        window.location.href = "./screen_order_main.html";
+      });
 
       restaurantOption.addEventListener("click", () => {
         if (awayOption.classList.contains("selection-active")) {
