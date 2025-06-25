@@ -77,10 +77,15 @@
       const restaurantOption = document.getElementById("selection_restaurant");
       const awayOption = document.getElementById("selection_away");
       const next = document.getElementById("btn-nav-next");
+      const back = document.getElementById("btn-nav-back");
       let infoText = document.getElementById("infoText");
 
       next.addEventListener("click", () => {
         window.location.href = "./screen_order_main.html";
+      });
+
+      back.addEventListener("click", () => {
+        window.location.href = "./index.html";
       });
 
       restaurantOption.addEventListener("click", () => {
