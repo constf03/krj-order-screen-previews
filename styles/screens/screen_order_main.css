@@ -126,6 +126,10 @@
   flex-direction: column;
 }
 
+.item-content-left button {
+  width: 40px;
+}
+
 .pricetag-cart-item {
   font-weight: 600;
   font-size: 18px;
