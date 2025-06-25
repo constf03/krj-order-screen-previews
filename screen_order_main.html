@@ -402,7 +402,7 @@
       displayDrinks();
 
       confirmCancelBtn.addEventListener("click", () => {
-        window.location.href = "/public/";
+        cancelOrder();
       });
 
       const setAddToCartModalData = (id, name, price) => {
@@ -470,6 +470,11 @@
           .join("");
 
         shoppingCart.innerHTML = items;
+      };
+
+      const cancelOrder = () => {
+        localStorage.setItem("CartItems", []);
+        window.location.href = "/";
       };
     </script>
   </body>

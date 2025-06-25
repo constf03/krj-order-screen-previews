@@ -11,7 +11,7 @@ const next = document.getElementById("btn-nav-next");
 if (next != null) {
   next.addEventListener("click", () => {
     switch (path) {
-      case "/public/screen_start.html":
+      case "/screen_start.html":
         window.location.href = "./screen_order_main.html";
         break;
       default:
@@ -23,7 +23,7 @@ if (next != null) {
 const back = document.getElementById("btn-nav-back");
 if (back != null) {
   back.addEventListener("click", () => {
-    if (path == "/public/screen_start.html") {
+    if (path == "/screen_start.html") {
       localStorage.setItem("whereToEatOption", undefined);
     }
     history.back(-1);
