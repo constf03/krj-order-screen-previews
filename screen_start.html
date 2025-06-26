@@ -31,7 +31,7 @@
     <div class="screen-start">
       <h1>Missä haluaisit syödä?</h1>
       <div class="container-selection">
-        <div class="card" id="selection_restaurant" style="width: 18rem">
+        <div class="card" id="selection-restaurant" style="width: 18rem">
           <img
             src="./images/wheretoeat_restaurant.png"
             class="card-img-top"
@@ -42,7 +42,7 @@
           </div>
         </div>
 
-        <div class="card" id="selection_away" style="width: 18rem">
+        <div class="card" id="selection-away" style="width: 18rem">
           <img
             src="./images/wheretoeat_away.png"
             class="card-img-top"
@@ -74,8 +74,8 @@
 
     <!--Embedded JS Code-->
     <script>
-      const restaurantOption = document.getElementById("selection_restaurant");
-      const awayOption = document.getElementById("selection_away");
+      const restaurantOption = document.getElementById("selection-restaurant");
+      const awayOption = document.getElementById("selection-away");
       const next = document.getElementById("btn-nav-next");
       const back = document.getElementById("btn-nav-back");
       let infoText = document.getElementById("infoText");
@@ -95,8 +95,8 @@
         if (!restaurantOption.classList.contains("selection-active")) {
           restaurantOption.classList.add("selection-active");
           infoText.innerHTML = "Valinta: <b>Syön paikan päällä</b>";
-          localStorage.setItem("whereToEatOption", "restaurant");
-          console.log(localStorage.getItem("whereToEatOption"));
+          localStorage.setItem("WhereToEatOption", "restaurant");
+          console.log(localStorage.getItem("WhereToEatOption"));
         }
       });
 
@@ -107,8 +107,8 @@
         if (!awayOption.classList.contains("selection-active")) {
           awayOption.classList.add("selection-active");
           infoText.innerHTML = "Valinta: <b>Otan mukaan</b>";
-          localStorage.setItem("whereToEatOption", "away");
-          console.log(localStorage.getItem("whereToEatOption"));
+          localStorage.setItem("WhereToEatOption", "away");
+          console.log(localStorage.getItem("WhereToEatOption"));
         }
       });
     </script>
