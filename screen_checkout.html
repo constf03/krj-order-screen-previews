@@ -29,11 +29,35 @@
   </head>
   <body>
     <div class="page">
-      <h1 class="h1">Oma tilaus</h1>
+      <h1 class="h1 mb-4">Oma tilaus</h1>
+
       <div class="container-cart" id="cart"></div>
-      <div class="container-total">
+
+      <div class="container-checkboxes mt-4">
+        <div class="form-check" id="selection-restaurant">
+          <span>Syön ravintolassa</span>
+        </div>
+        <div class="form-check" id="selection-away">
+          <span>Otan mukaan</span>
+        </div>
+      </div>
+
+      <div class="container-total mt-4">
         <span>Yhteensä</span>
         <span id="cart-total"></span>
+      </div>
+
+      <div class="container-nav-buttons">
+        <button
+          class="btn btn-outline-secondary"
+          id="btn-nav-back"
+          onclick="window.location.href = './screen_order_main.html'"
+        >
+          Takaisin
+        </button>
+        <button class="btn btn-outline-secondary" id="btn-nav-next">
+          Maksa
+        </button>
       </div>
     </div>
 
@@ -48,10 +72,46 @@
     <script>
       const cart = document.getElementById("cart");
       const total = document.getElementById("cart-total");
+      const restaurantOption = document.getElementById("selection-restaurant");
+      const awayOption = document.getElementById("selection-away");
+      const whereToEatOption = localStorage.getItem("WhereToEatOption");
+      const next = document.getElementById("btn-nav-next");
       let cartItems = JSON.parse(localStorage.getItem("CartItems"));
       let cartTotal = parseInt(localStorage.getItem("CartTotal"));
 
       total.innerHTML = `${cartTotal} €`;
+      next.innerHTML = `Maksa (${cartTotal} €)`;
+
+      switch (whereToEatOption) {
+        case "restaurant":
+          restaurantOption.classList.add("form-check-selected");
+          break;
+        case "away":
+          awayOption.classList.add("form-check-selected");
+          break;
+        default:
+          break;
+      }
+
+      restaurantOption.addEventListener("click", () => {
+        if (awayOption.classList.contains("form-check-selected")) {
+          awayOption.classList.remove("form-check-selected");
+        }
+        if (!restaurantOption.classList.contains("form-check-selected")) {
+          restaurantOption.classList.add("form-check-selected");
+          localStorage.setItem("WhereToEatOption", "restaurant");
+        }
+      });
+
+      awayOption.addEventListener("click", () => {
+        if (restaurantOption.classList.contains("form-check-selected")) {
+          restaurantOption.classList.remove("form-check-selected");
+        }
+        if (!awayOption.classList.contains("form-check-selected")) {
+          awayOption.classList.add("form-check-selected");
+          localStorage.setItem("WhereToEatOption", "away");
+        }
+      });
 
       const displayCart = () => {
         const items = cartItems
@@ -60,7 +120,7 @@
 
             return `
                 <div class="container-cart-item">
-                    <div>
+                    <div style="max-width: 300px;">
                         <span><b>${name}</b></span>
                         <span class="badge text-bg-secondary">${quantity}</span>
                     </div>
