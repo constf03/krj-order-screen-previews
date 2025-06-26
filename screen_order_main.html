@@ -126,7 +126,10 @@
               </div>
             </div>
             <div style="display: flex; flex-direction: column">
-              <button class="btn btn-outline-primary mb-2">
+              <button
+                class="btn btn-outline-primary mb-2"
+                onclick="window.location.href = './screen_checkout.html'"
+              >
                 Siirry maksamaan
               </button>
               <button
@@ -517,7 +520,7 @@
 
       const cancelOrder = () => {
         localStorage.setItem("CartItems", JSON.stringify([]));
-        console.log(JSON.parse(localStorage.getItem("CartItems")));
+        localStorage.setItem("CartTotal", "0");
         window.location.href = "./index.html";
       };
     </script>
