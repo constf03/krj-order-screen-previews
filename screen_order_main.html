@@ -29,9 +29,6 @@
   </head>
   <body>
     <div class="page">
-      <div class="banner mb-4">
-        <img src="images/krj_banner.png" alt="..." />
-      </div>
       <div class="container-order-screen">
         <div class="container-left">
           <div class="container-menu">
@@ -333,24 +330,24 @@
             const { id, itemName, itemDescription, itemPrice } = object;
 
             const menuItem = `
-            <div
-            class="menu-item"
-            data-bs-toggle="modal"
-            data-bs-target="#addToCartModal"
-            onclick="setAddToCartModalData(${id}, '${itemName}', ${itemPrice})"
-            >
-              <div class="menu-item-default-logo">
-                <img src="./images/krj_logo_default.png" style="width: 100%" alt="..."/>
+              <div
+              class="menu-item"
+              data-bs-toggle="modal"
+              data-bs-target="#addToCartModal"
+              onclick="setAddToCartModalData(${id}, '${itemName}', ${itemPrice})"
+              >
+                <div class="menu-item-default-logo">
+                  <img src="./images/krj_logo_default.png" style="width: 100%" alt="..."/>
+                </div>
+                <div class="menu-item-info">
+                  <p>${itemName}</p>
+                  <p>${itemDescription ? itemDescription : ""}</p>
+                </div>
+                <div class="menu-item-price-tag">
+                  <span>${itemPrice} €</span>
+                </div>
               </div>
-              <div class="menu-item-info">
-                <p>${itemName}</p>
-                <p>${itemDescription ? itemDescription : ""}</p>
-              </div>
-              <div class="menu-item-price-tag">
-                <span>${itemPrice} €</span>
-              </div>
-            </div>
-          `;
+            `;
 
             switch (itemName) {
               case "Tulivuori Kana":
@@ -377,22 +374,26 @@
 
         let dataDisplay = payload
           .map((object) => {
-            const { itemName, itemPrice } = object;
+            const { id, itemName, itemPrice } = object;
 
             const createDrink = (imgSrc) => {
               return `
-            <div class="menu-item">
-              <div style="width: 40px; margin: 6px;">
-                <img src=${imgSrc} style="width: 100%" alt="..."/>
-              </div>
-              <div>
-                <p>${itemName}</p>
-              </div>
-              <div class="menu-item-price-tag">
-                ${itemPrice} €
-              </div>
-            </div>
-          `;
+                <div class="menu-item"
+                data-bs-toggle="modal"
+                data-bs-target="#addToCartModal"
+                onclick="setAddToCartModalData(${id}, '${itemName}', ${itemPrice})"
+                >
+                  <div style="width: 40px; margin: 6px;">
+                    <img src=${imgSrc} style="width: 100%" alt="..."/>
+                  </div>
+                  <div>
+                    <p>${itemName}</p>
+                  </div>
+                  <div class="menu-item-price-tag">
+                    ${itemPrice} €
+                  </div>
+                </div>
+              `;
             };
 
             switch (itemName) {
@@ -490,21 +491,21 @@
             const { name, price, quantity, total } = object;
 
             return `
-            <div class="container-cart-item">
-              <div class="wrapper-cart-item">
-                <div class="item-content-left">
-                  <span>${name}</span>
-                  <div>
-                    <span class="badge text-bg-secondary">${quantity}</span>
-                    <button class="btn btn-outline-primary">+</button>
-                    <button class="btn btn-outline-primary">-</button>
-                    <button class="btn btn-outline-danger">X</button>
+              <div class="container-cart-item">
+                <div class="wrapper-cart-item">
+                  <div class="item-content-left">
+                    <span>${name}</span>
+                    <div>
+                      <span class="badge text-bg-secondary">${quantity}</span>
+                      <button class="btn btn-outline-primary">+</button>
+                      <button class="btn btn-outline-primary">-</button>
+                      <button class="btn btn-outline-danger">X</button>
+                    </div>
                   </div>
+                  <span class="pricetag-cart-item">${total} €</span>
                 </div>
-                <span class="pricetag-cart-item">${total} €</span>
               </div>
-            </div>
-          `;
+            `;
           })
           .join("");
 
