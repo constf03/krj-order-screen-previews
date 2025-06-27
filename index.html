@@ -63,6 +63,13 @@
       const button_eng = document.getElementById("english");
       const startBtn = document.getElementById("btn-start");
 
+      const resetLocalStorage = () => {
+        localStorage.setItem("CartItems", JSON.stringify([]));
+        localStorage.setItem("CartTotal", "0");
+      };
+
+      resetLocalStorage();
+
       startBtn.addEventListener("click", () => {
         window.location.href = "./screen_start.html";
       });
