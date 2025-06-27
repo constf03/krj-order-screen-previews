@@ -450,6 +450,37 @@
         }
       };
 
+      const handleCartItemQuantityChange = (operation, id) => {
+        if (operation === "+") {
+          cartItems.forEach((object) => {
+            if (object.quantity > 9 || object.name.includes("Kevätrullat"))
+              return;
+            if (object.id === id) {
+              object.quantity++;
+              object.total = object.price * object.quantity;
+            }
+          });
+        }
+
+        if (operation === "-") {
+          cartItems.forEach((object) => {
+            if (object.quantity <= 1 || object.name.includes("Kevätrullat"))
+              return;
+            if (object.id === id) {
+              object.quantity--;
+              object.total = object.price * object.quantity;
+            }
+          });
+        }
+
+        updateShoppingCartData();
+      };
+
+      const removeCartItem = (id) => {
+        cartItems = cartItems.filter((object) => object.id !== id);
+        updateShoppingCartData();
+      };
+
       const addToCart = () => {
         const newItem = {
           id: itemId,
@@ -467,12 +498,8 @@
         }
 
         cartItems.push(newItem);
-        console.log("Shopping Cart", cartItems);
-        cartAmount.innerHTML = getCartAmount();
-        localStorage.setItem("CartItems", JSON.stringify(cartItems));
         updateShoppingCartData();
         quantity = 1;
-        console.log(JSON.parse(localStorage.getItem("CartItems")));
       };
 
       const getCartAmount = () => {
@@ -488,18 +515,27 @@
       const updateShoppingCartData = () => {
         const items = cartItems
           .map((object) => {
-            const { name, price, quantity, total } = object;
+            const { id, name, price, quantity, total } = object;
 
             return `
               <div class="container-cart-item">
                 <div class="wrapper-cart-item">
                   <div class="item-content-left">
-                    <span>${name}</span>
+                    <span><b>${name}</b></span>
                     <div>
                       <span class="badge text-bg-secondary">${quantity}</span>
-                      <button class="btn btn-outline-primary">+</button>
-                      <button class="btn btn-outline-primary">-</button>
-                      <button class="btn btn-outline-danger">X</button>
+                      <button
+                      class="btn btn-outline-primary"
+                      onclick="handleCartItemQuantityChange('+', ${id})"
+                      >+</button>
+                      <button
+                      class="btn btn-outline-primary"
+                      onclick="handleCartItemQuantityChange('-', ${id})"
+                      >-</button>
+                      <button
+                      class="btn btn-outline-danger"
+                      onclick="removeCartItem(${id})"
+                      >X</button>
                     </div>
                   </div>
                   <span class="pricetag-cart-item">${total} €</span>
@@ -517,6 +553,8 @@
         shoppingCart.innerHTML = items;
         cartTotal.innerHTML = `Yhteensä: ${total} €`;
         localStorage.setItem("CartTotal", total.toString());
+        localStorage.setItem("CartItems", JSON.stringify(cartItems));
+        cartAmount.innerHTML = getCartAmount();
       };
 
       const cancelOrder = () => {
